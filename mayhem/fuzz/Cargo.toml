@@ -1,0 +1,29 @@
+# Self-contained cargo-fuzz crate for the mayhem layer.
+#
+# This is ADDITIVE: the upstream OSS-Fuzz harness lives in ../../fuzz and is left untouched. That
+# harness was written against an older scrypt release (the `simple` cargo feature, removed at HEAD)
+# and no longer compiles against the current crate. Rather than modify the upstream file (which
+# would break the additive two-branch contract), we ship our own equivalent harness here, expressed
+# against the current `phc` API with the same fuzzing surface.
+[package]
+name = "scrypt-mayhem-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+scrypt = { path = "../../scrypt", features = ["phc", "alloc"] }
+
+[[bin]]
+name = "scrypt_fuzzer"
+path = "fuzz_targets/scrypt_fuzzer.rs"
+test = false
+doc = false
+bench = false
+
+# Standalone crate (not part of the upstream workspace, which `exclude`s fuzz dirs).
+[workspace]

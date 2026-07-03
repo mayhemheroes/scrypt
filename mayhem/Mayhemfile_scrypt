@@ -1,0 +1,6 @@
+project: scrypt
+target: scrypt
+cmds:
+  - cmd: /mayhem/scrypt_fuzzer
+    libfuzzer: true
+    dictionary: /mayhem/mayhem/scrypt.dict

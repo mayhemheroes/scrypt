@@ -1,0 +1,24 @@
+# libFuzzer dictionary for the scrypt PHC fuzz target.
+# The harness `arbitrary`-decodes a (password, salt, params) tuple from the raw input and then
+# builds + reparses a `$scrypt$...` PHC string. These tokens are the PHC/Modular-Crypt structural
+# pieces and scrypt parameter keys the parser keys off of, useful as mutation fragments.
+"$scrypt$"
+"$7$"
+"scrypt"
+"ln="
+"r="
+"p="
+"v="
+"$ln=16,r=8,p=1$"
+"ln=16,r=8,p=1"
+"ln=10,r=8,p=1"
+"ln=4,r=1,p=1"
+"ln=15,r=8,p=1"
+","
+"$"
+"="
+# B64 (PHC alphabet) salt/hash fragments from the crate's own test vectors.
+"aM15713r3Xsvxbi31lqr1Q"
+"nFNh2CVHVjNldFVKDHDlm4CbdRSCdEBsjjJxD+iCs5E"
+"NaCl"
+"password"
